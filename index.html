@@ -1,136 +1,718 @@
-<!-- NAVBAR -->
-<nav>
-  <div class="logo">
-    <img src="/cx2space-logo.png" alt="CX2Space Logo">
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CX2Space — AI Automation & Cyber Operations</title>
+  <meta name="description" content="CX2Space delivers AI automation, cyber operations support, practical cybersecurity training, and intelligent workflow systems." />
 
-  <div class="nav-links">
-    <a href="#home">Home</a>
-    <a href="#services">Services</a>
-    <a href="#automation">Automation</a>
-    <a href="#cybersecurity">Cybersecurity</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-<!-- HERO SECTION -->
-<section id="home" class="hero">
-  <div class="hero-content">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <div class="hero-left">
-      <h1>
-        AI Systems.<br>
-        Cyber Operations.<br>
-        <span>Built for Modern Business.</span>
-      </h1>
+    :root {
+      --dark: #020814;
+      --ink: #07142d;
+      --muted: #52627a;
+      --blue: #2563eb;
+      --cyan: #18a8ff;
+      --violet: #7c3aed;
+      --soft: #f7faff;
+      --card: #ffffff;
+      --line: rgba(7, 20, 45, 0.09);
+      --shadow: 0 24px 70px rgba(7, 20, 45, 0.10);
+    }
 
-      <p>
-        CX2Space delivers advanced AI automation, cybersecurity operations,
-        digital infrastructure, threat intelligence, and intelligent workflow
-        systems designed for organisations that want modern capability without
-        enterprise complexity.
-      </p>
+    html {
+      scroll-behavior: smooth;
+    }
 
-      <div class="hero-buttons">
-        <button class="primary-btn">Book Consultation</button>
-        <button class="secondary-btn">Explore Services</button>
-      </div>
+    body {
+      font-family: "Outfit", sans-serif;
+      background: #ffffff;
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(37, 99, 235, 0.12), transparent 26%),
+        radial-gradient(circle at 8% 92%, rgba(124, 58, 237, 0.12), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(7, 20, 45, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(7, 20, 45, 0.025) 1px, transparent 1px);
+      background-size: 76px 76px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      padding: 0 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      z-index: 1000;
+    }
+
+    .logo {
+      width: 280px;
+      height: 70px;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 280px;
+      height: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .nav-links a {
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue), var(--violet));
+      color: white !important;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.22);
+    }
+
+    section {
+      scroll-margin-top: 110px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 160px 0 95px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 15px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 12px 36px rgba(7, 20, 45, 0.06);
+      color: #1647b8;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .badge span {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 0 0 18px var(--cyan);
+    }
+
+    h1 {
+      font-size: clamp(52px, 6vw, 84px);
+      line-height: 0.96;
+      letter-spacing: -0.065em;
+      font-weight: 900;
+      color: #061127;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #2563eb, #4f46e5, #7c3aed);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin-top: 30px;
+      font-size: 20px;
+      line-height: 1.8;
+      color: #344766;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      margin-top: 40px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 28px;
+      border-radius: 15px;
+      font-weight: 800;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--blue), var(--violet));
+      color: white;
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .capabilities-card {
+      position: relative;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow);
+      animation: fadeScale 0.8s 0.2s ease both;
+      overflow: hidden;
+    }
+
+    .capabilities-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -110px;
+      top: -110px;
+      background: radial-gradient(circle, rgba(24, 168, 255, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .capabilities-card h2 {
+      position: relative;
+      font-size: 27px;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .capability-box {
+      position: relative;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: #f8fbff;
+      margin-bottom: 18px;
+      transition: 0.25s ease;
+    }
+
+    .capability-box:hover {
+      transform: translateY(-4px);
+      border-color: rgba(37, 99, 235, 0.26);
+      box-shadow: 0 18px 42px rgba(7, 20, 45, 0.07);
+    }
+
+    .capability-box h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .capability-box p {
+      color: #52627a;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 110px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      max-width: 780px;
+      margin-bottom: 44px;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(36px, 4vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+      margin-bottom: 18px;
+      color: #061127;
+    }
+
+    .section-head p {
+      color: #52627a;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .service-card,
+    .mini-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 16px 44px rgba(7, 20, 45, 0.05);
+      transition: 0.25s ease;
+    }
+
+    .service-card:hover,
+    .mini-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(37, 99, 235, 0.25);
+      box-shadow: 0 22px 60px rgba(7, 20, 45, 0.09);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(124,58,237,0.10));
+      color: var(--blue);
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3,
+    .mini-card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .service-card p,
+    .mini-card p {
+      color: #52627a;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .process-panel {
+      padding: 28px;
+      border-radius: 28px;
+      background: #061127;
+      color: white;
+      box-shadow: 0 24px 70px rgba(7, 20, 45, 0.18);
+    }
+
+    .process-step {
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
+      margin-bottom: 16px;
+    }
+
+    .process-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .process-step h3 {
+      color: white;
+      margin-bottom: 7px;
+      font-size: 18px;
+    }
+
+    .process-step p {
+      color: rgba(255,255,255,0.68);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .contact-section {
+      padding: 100px 0;
+      background: #061127;
+      color: white;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 44px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .contact-box h2 {
+      font-size: clamp(34px, 4vw, 52px);
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+    }
+
+    .contact-box p {
+      color: rgba(255,255,255,0.68);
+      font-size: 18px;
+      line-height: 1.75;
+      max-width: 720px;
+    }
+
+    footer {
+      padding: 26px 56px;
+      border-top: 1px solid var(--line);
+      background: white;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      width: 220px;
+      height: 60px;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo img {
+      width: 220px;
+      height: auto;
+      display: block;
+    }
+
+    .footer-text {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeScale {
+      from { opacity: 0; transform: translateY(24px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 950px) {
+      nav {
+        height: auto;
+        padding: 14px 22px;
+      }
+
+      .logo,
+      .logo img {
+        width: 210px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .hero-grid,
+      .split,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      footer {
+        padding: 26px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#home" class="logo" aria-label="CX2Space Home">
+      <img src="/cx2space-logo.png" alt="CX2Space Logo" />
+    </a>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#automation">Automation</a>
+      <a href="#cybersecurity">Cybersecurity</a>
+      <a href="#training">Training</a>
+      <a class="nav-cta" href="#contact">Contact</a>
     </div>
+  </nav>
 
-    <div class="hero-right">
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge"><span></span> AI automation · Cyber operations · Practical capability</div>
+        <h1>AI Systems.<br />Cyber Operations.<br /><span class="gradient-text">Built for Modern Business.</span></h1>
+        <p>CX2Space delivers advanced AI automation, cybersecurity operations, digital infrastructure, threat intelligence, and intelligent workflow systems designed for organisations that want modern capability without enterprise complexity.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Book Consultation</a>
+          <a href="#services" class="btn btn-secondary">Explore Services</a>
+        </div>
+      </div>
+
       <div class="capabilities-card">
         <h2>Core Capabilities</h2>
-
         <div class="capability-box">
           <h3>AI Automation Systems</h3>
-          <p>
-            Operational automation, AI workflow orchestration,
-            intelligent assistants, reporting systems,
-            and business process acceleration.
-          </p>
+          <p>Operational automation, AI workflow orchestration, intelligent assistants, reporting systems, and business process acceleration.</p>
         </div>
-
         <div class="capability-box">
           <h3>Cybersecurity Operations</h3>
-          <p>
-            Threat hunting, incident response support,
-            threat intelligence, phishing simulations,
-            and security investigation workflows.
-          </p>
+          <p>Threat hunting, incident response support, threat intelligence, phishing simulations, and security investigation workflows.</p>
         </div>
-
         <div class="capability-box">
           <h3>AI-Powered Security Solutions</h3>
-          <p>
-            Security-focused AI agents, monitoring workflows,
-            intelligence correlation, investigation assistance,
-            and operational automation.
-          </p>
+          <p>Security-focused AI agents, monitoring workflows, intelligence correlation, investigation assistance, and operational automation.</p>
         </div>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <section id="services" class="section-block">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Services</div>
+        <h2>Advanced automation and cybersecurity capability in one focused technology partner.</h2>
+        <p>CX2Space supports modern organisations through AI automation, cyber operations support, practical cybersecurity training, digital workflow engineering, and security-aware technology delivery.</p>
+      </div>
 
-<!-- SERVICES -->
-<section id="services" class="section-block">
-  <h2>Services</h2>
+      <div class="grid-3">
+        <div class="service-card">
+          <div class="icon">AI</div>
+          <h3>AI Automation</h3>
+          <p>Workflow orchestration, intelligent assistants, automated reporting, document processing, business process automation, and AI-enabled operational systems.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">SEC</div>
+          <h3>Cyber Operations</h3>
+          <p>Threat intelligence, threat hunting, phishing simulations, incident response support, security investigations, and cyber readiness workflows.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">LAB</div>
+          <h3>Cyber Training</h3>
+          <p>Practical SOC analyst training, alert investigation labs, case-study learning, phishing awareness, and career-ready cybersecurity skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <p>
-    AI automation, cybersecurity operations support,
-    digital transformation systems, practical cyber training,
-    intelligent workflow engineering, and operational consulting.
-  </p>
-</section>
+  <section id="automation" class="section-block">
+    <div class="container split">
+      <div class="section-head">
+        <div class="eyebrow">Automation</div>
+        <h2>Intelligent workflows that do more than answer prompts.</h2>
+        <p>CX2Space designs AI-enabled systems around process, context, data movement, approvals, reporting, and repeatable business logic.</p>
+      </div>
 
-<!-- AUTOMATION -->
-<section id="automation" class="section-block">
-  <h2>Automation</h2>
+      <div class="process-panel">
+        <div class="process-step">
+          <h3>Workflow Intelligence</h3>
+          <p>Structured systems that map tasks, inputs, outputs, owners, approvals, and decision points.</p>
+        </div>
+        <div class="process-step">
+          <h3>Document & Knowledge Automation</h3>
+          <p>Extraction, transformation, comparison, summarisation, and generation across business information flows.</p>
+        </div>
+        <div class="process-step">
+          <h3>Connected Operating Layers</h3>
+          <p>Automations that connect email, forms, spreadsheets, CRMs, reporting tools, portals, and internal processes.</p>
+        </div>
+        <div class="process-step">
+          <h3>Controlled AI Agents</h3>
+          <p>Task-specific AI agents with guardrails, approvals, audit trails, and human oversight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <p>
-    AI workflow systems, intelligent business automation,
-    reporting platforms, operational orchestration,
-    scalable digital process engineering,
-    and custom AI-powered operational tooling.
-  </p>
-</section>
+  <section id="cybersecurity" class="section-block">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Cybersecurity</div>
+        <h2>Cyber readiness across awareness, intelligence, hunting, and response support.</h2>
+        <p>CX2Space supports security-focused work through investigation, awareness, intelligence review, AI-assisted workflows, and practical cyber operations capability.</p>
+      </div>
 
-<!-- CYBERSECURITY -->
-<section id="cybersecurity" class="section-block">
-  <h2>Cybersecurity</h2>
+      <div class="grid-4">
+        <div class="mini-card">
+          <div class="icon">PH</div>
+          <h3>Phishing Simulation</h3>
+          <p>Controlled campaigns, awareness training, staff readiness checks, and clear management reporting.</p>
+        </div>
+        <div class="mini-card">
+          <div class="icon">TI</div>
+          <h3>Threat Intelligence</h3>
+          <p>Threat research, external intelligence review, exposed-data analysis, and cyber risk context.</p>
+        </div>
+        <div class="mini-card">
+          <div class="icon">HT</div>
+          <h3>Threat Hunting</h3>
+          <p>Investigation support across suspicious users, endpoints, network signals, and intelligence leads.</p>
+        </div>
+        <div class="mini-card">
+          <div class="icon">IR</div>
+          <h3>Incident Support</h3>
+          <p>Triage, evidence review, reporting, and response coordination support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <p>
-    Threat hunting, incident response support,
-    threat intelligence, phishing simulations,
-    deep and dark web monitoring,
-    AI-assisted cyber operations,
-    and security readiness workflows.
-  </p>
-</section>
+  <section id="training" class="section-block">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Training</div>
+        <h2>Practical cybersecurity training built around how security work is actually performed.</h2>
+        <p>CX2Space training helps learners think like analysts: review evidence, investigate alerts, understand attacker behaviour, and communicate findings with confidence.</p>
+      </div>
 
-<!-- CONTACT -->
-<section id="contact" class="section-block">
-  <h2>Contact</h2>
+      <div class="grid-3">
+        <div class="service-card">
+          <div class="icon">01</div>
+          <h3>SOC Foundations</h3>
+          <p>How alerts, logs, users, devices, and incidents connect inside real security operations.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">02</div>
+          <h3>Investigation Practice</h3>
+          <p>Hands-on examples using realistic alert scenarios, phishing cases, endpoint events, and timelines.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">03</div>
+          <h3>Career Readiness</h3>
+          <p>Analyst thinking, reporting, communication, interview preparation, and practical cyber skill-building.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <p>
-    Contact CX2Space to discuss AI systems,
-    cybersecurity operations,
-    automation projects,
-    digital infrastructure,
-    and modern operational solutions.
-  </p>
-</section>
+  <section id="contact" class="contact-section">
+    <div class="container contact-box">
+      <div>
+        <h2>Start with a direct conversation.</h2>
+        <p>Discuss AI automation, cyber readiness, training, or a specific operational challenge that needs a sharper solution.</p>
+      </div>
+      <a href="mailto:hello@cx2space.com" class="btn btn-primary">hello@cx2space.com</a>
+    </div>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-
-  <div class="footer-logo">
-    <img src="/cx2space-logo.png" alt="CX2Space Logo">
-  </div>
-
-  <div class="footer-text">
-    © 2026 CX2Space. All rights reserved.
-  </div>
-
-</footer>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="/cx2space-logo.png" alt="CX2Space Logo" />
+      </div>
+      <div class="footer-text">© 2026 CX2Space. All rights reserved.</div>
+      <div class="footer-text">AI automation · Cyber operations · Practical cybersecurity training</div>
+    </div>
+  </footer>
+</body>
+</html>
