@@ -268,10 +268,9 @@ html,body{background:#0C0C0C;font-family:'Kanit',sans-serif;overflow-x:hidden;sc
   display:flex;align-items:center;justify-content:center;
 }
 .card-img-label{
-  color:rgba(255,255,255,.25);font-size:clamp(.7rem,1.4vw,.9rem);
-  font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:rgba(255,255,255,.3);font-size:clamp(1.6rem,4vw,3.2rem);
+  font-weight:900;text-transform:uppercase;letter-spacing:.12em;
 }
-.card-img svg{width:78%;max-width:260px;opacity:.55}
 
 /* ════════════════════════════════
    6. FOOTER
@@ -457,9 +456,12 @@ html,body{background:#0C0C0C;font-family:'Kanit',sans-serif;overflow-x:hidden;sc
     AI automation · Cyber operations · Security training
   </p>
   <div class="fade-in" data-delay="300">
-    <button class="btn-contact">Contact Us</button>
+    <a href="mailto:Info@cx2space.com" class="btn-contact" style="display:inline-block;text-decoration:none;">Contact Us</a>
   </div>
-  <p class="footer-copy fade-in" data-delay="500">
+  <div class="fade-in" data-delay="420" style="margin-top:4px;">
+    <a href="mailto:Info@cx2space.com" style="color:rgba(187,204,215,0.5);font-family:'Kanit',sans-serif;font-weight:300;font-size:clamp(.85rem,1.6vw,1.2rem);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:inline-block;margin-top:18px;transition:color .2s;" onmouseover="this.style.color='rgba(187,204,215,0.95)'" onmouseout="this.style.color='rgba(187,204,215,0.5)'">Info@cx2space.com</a>
+  </div>
+  <p class="footer-copy fade-in" data-delay="550">
     © 2026 CX2Space · Auckland, New Zealand
   </p>
 </section>
@@ -557,27 +559,110 @@ SERVICES.forEach((s,i) => {
 });
 
 /* ══════════════════════════════════
-   BUILD PROJECTS
+   BUILD PROJECTS — full-size animated flow
 ══════════════════════════════════ */
+
+/* Generates a full animated SVG flow diagram that fills its container */
+function buildFlowSVG(p, svgId) {
+  const VW = 600, VH = 400;
+  const cx = 300, cy = 200, cr = 52;
+  const nodeH = 58, nodeW = 130;
+  const ys = [80, 200, 320];
+  const lx = 16, rx = VW - nodeW - 16;
+
+  const leftNodes = p.nodes.slice(0,3).map((n, ni) => `
+    <rect x="${lx}" y="${ys[ni]-nodeH/2}" width="${nodeW}" height="${nodeH}" rx="12"
+      fill="rgba(187,204,215,0.08)" stroke="rgba(187,204,215,0.28)" stroke-width="1.5"/>
+    <text x="${lx+nodeW/2}" y="${ys[ni]+7}" text-anchor="middle"
+      fill="#D7E2EA" font-family="Kanit" font-size="18" font-weight="600">${n.label}</text>
+  `).join('');
+
+  const rightNodes = p.nodes.slice(3).map((n, ni) => `
+    <rect x="${rx}" y="${ys[ni]-nodeH/2}" width="${nodeW}" height="${nodeH}" rx="12"
+      fill="rgba(187,204,215,0.08)" stroke="rgba(187,204,215,0.28)" stroke-width="1.5"/>
+    <text x="${rx+nodeW/2}" y="${ys[ni]+7}" text-anchor="middle"
+      fill="#D7E2EA" font-family="Kanit" font-size="18" font-weight="600">${n.label}</text>
+  `).join('');
+
+  const leftLines = ys.map((y) => `
+    <line x1="${lx+nodeW}" y1="${y}" x2="${cx-cr-4}" y2="${cy}"
+      stroke="rgba(187,204,215,0.2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+  `).join('');
+
+  const rightLines = ys.map((y) => `
+    <line x1="${cx+cr+4}" y1="${cy}" x2="${rx}" y2="${y}"
+      stroke="rgba(187,204,215,0.2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+  `).join('');
+
+  const pulseRings = `
+    <circle cx="${cx}" cy="${cy}" r="${cr}" fill="none"
+      stroke="${p.accent}" stroke-width="2" opacity="0">
+      <animate attributeName="r" values="${cr};${cr+22};${cr}" dur="2.4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.55;0;0.55" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="${cx}" cy="${cy}" r="${cr}" fill="none"
+      stroke="${p.accent}" stroke-width="1.2" opacity="0">
+      <animate attributeName="r" values="${cr};${cr+36};${cr}" dur="2.4s" begin="0.9s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="2.4s" begin="0.9s" repeatCount="indefinite"/>
+    </circle>`;
+
+  const centre = `
+    <circle cx="${cx}" cy="${cy}" r="${cr}" fill="${p.accent}"/>
+    <text x="${cx}" y="${cy-8}" text-anchor="middle" fill="white"
+      font-family="Kanit" font-size="18" font-weight="700">CX2</text>
+    <text x="${cx}" y="${cy+14}" text-anchor="middle" fill="rgba(255,255,255,0.7)"
+      font-family="Kanit" font-size="13" font-weight="500">ENGINE</text>`;
+
+  const inboundPackets = ys.map((y, ni) => {
+    const x1 = lx+nodeW, x2 = cx-cr-4;
+    return [0,1,2].map(di => {
+      const delay = (ni * 0.45 + di * 1.1).toFixed(2);
+      return `
+        <circle r="6" fill="${p.accent}" opacity="0">
+          <animateMotion dur="2.6s" begin="${delay}s" repeatCount="indefinite" calcMode="linear"
+            path="M ${x1} ${y} L ${x2} ${cy}"/>
+          <animate attributeName="opacity" dur="2.6s" begin="${delay}s"
+            values="0;1;1;0" keyTimes="0;0.08;0.85;1" repeatCount="indefinite"/>
+        </circle>`;
+    }).join('');
+  }).join('');
+
+  const outboundPackets = ys.map((y, ni) => {
+    const x1 = cx+cr+4, x2 = rx;
+    return [0,1,2].map(di => {
+      const delay = (ni * 0.45 + di * 1.1 + 0.55).toFixed(2);
+      return `
+        <circle r="6" fill="rgba(187,204,215,0.95)" opacity="0">
+          <animateMotion dur="2.6s" begin="${delay}s" repeatCount="indefinite" calcMode="linear"
+            path="M ${x1} ${cy} L ${x2} ${y}"/>
+          <animate attributeName="opacity" dur="2.6s" begin="${delay}s"
+            values="0;1;1;0" keyTimes="0;0.08;0.85;1" repeatCount="indefinite"/>
+        </circle>`;
+    }).join('');
+  }).join('');
+
+  return `
+    <svg id="${svgId}" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      style="position:absolute;inset:0;width:100%;height:100%;display:block;">
+      <defs>
+        <radialGradient id="${svgId}-bg" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="${p.accent}" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#0C0C0C" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="${VW}" height="${VH}" fill="url(#${svgId}-bg)"/>
+      ${leftLines}${rightLines}${pulseRings}${leftNodes}${rightNodes}${centre}
+      ${inboundPackets}${outboundPackets}
+    </svg>`;
+}
+
 const pl = document.getElementById('projects-list');
 PROJECTS.forEach((p, i) => {
   const track = document.createElement('div');
   track.className = 'project-track';
-
-  // SVG flow diagram markup
-  const svgNodes = p.nodes.map(n =>
-    `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="8"
-      fill="rgba(187,204,215,0.07)" stroke="rgba(187,204,215,0.2)" stroke-width="1"/>
-     <text x="${n.x + n.w/2}" y="${n.y + n.h/2 + 4}" text-anchor="middle"
-      fill="#D7E2EA" font-family="Kanit" font-size="9" font-weight="500">${n.label}</text>`
-  ).join('');
-
-  const svgLines = p.lines.map(l =>
-    `<line x1="${l[0]}" y1="${l[1]}" x2="${l[2]}" y2="${l[3]}"
-      stroke="rgba(187,204,215,0.2)" stroke-width="1" stroke-dasharray="4 3"/>`
-  ).join('');
-
   const cardTop = 96 + i * 28;
+  const svgId = `flow-${i}`;
 
   track.innerHTML = `
     <div class="project-card" id="pcard-${i}" style="top:${cardTop}px">
@@ -601,15 +686,15 @@ PROJECTS.forEach((p, i) => {
           </div>
         </div>
         <div class="card-col-right">
-          <div class="card-img" style="height:100%;min-height:clamp(270px,34vw,490px);background:${p.colors[2]};flex-direction:column;gap:14px">
-            <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:78%;max-width:260px;opacity:.55">
-              ${svgNodes}
-              ${svgLines}
-              <circle cx="150" cy="80" r="22" fill="${p.accent}" opacity=".85"/>
-              <text x="150" y="84" text-anchor="middle" fill="white"
-                font-family="Kanit" font-size="10" font-weight="700">CX2</text>
-            </svg>
-            <span style="color:rgba(255,255,255,.22);font-size:clamp(.65rem,1.2vw,.85rem);font-weight:500;text-transform:uppercase;letter-spacing:.1em">${p.name}</span>
+          <div class="card-img" style="
+            height:100%;
+            min-height:clamp(270px,34vw,490px);
+            background:${p.colors[2]};
+            padding:0;
+            overflow:hidden;
+            position:relative;
+          ">
+            ${buildFlowSVG(p, svgId)}
           </div>
         </div>
       </div>
