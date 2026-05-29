@@ -1,718 +1,781 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CX2Space — AI Automation & Cyber Operations</title>
-  <meta name="description" content="CX2Space delivers AI automation, cyber operations support, practical cybersecurity training, and intelligent workflow systems." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --dark: #020814;
-      --ink: #07142d;
-      --muted: #52627a;
-      --blue: #2563eb;
-      --cyan: #18a8ff;
-      --violet: #7c3aed;
-      --soft: #f7faff;
-      --card: #ffffff;
-      --line: rgba(7, 20, 45, 0.09);
-      --shadow: 0 24px 70px rgba(7, 20, 45, 0.10);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Outfit", sans-serif;
-      background: #ffffff;
-      color: var(--ink);
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background:
-        radial-gradient(circle at 85% 18%, rgba(37, 99, 235, 0.12), transparent 26%),
-        radial-gradient(circle at 8% 92%, rgba(124, 58, 237, 0.12), transparent 24%),
-        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background-image:
-        linear-gradient(rgba(7, 20, 45, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(7, 20, 45, 0.025) 1px, transparent 1px);
-      background-size: 76px 76px;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      width: min(1200px, calc(100% - 44px));
-      margin: 0 auto;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 90px;
-      padding: 0 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line);
-      z-index: 1000;
-    }
-
-    .logo {
-      width: 280px;
-      height: 70px;
-      overflow: visible;
-      display: flex;
-      align-items: center;
-    }
-
-    .logo img {
-      width: 280px;
-      height: auto;
-      display: block;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #0f172a;
-    }
-
-    .nav-links a {
-      transition: 0.25s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--blue);
-    }
-
-    .nav-cta {
-      padding: 11px 18px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--blue), var(--violet));
-      color: white !important;
-      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.22);
-    }
-
-    section {
-      scroll-margin-top: 110px;
-    }
-
-    .hero {
-      min-height: 100vh;
-      padding: 160px 0 95px;
-      display: flex;
-      align-items: center;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 72px;
-      align-items: center;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 15px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(37, 99, 235, 0.16);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.78);
-      box-shadow: 0 12px 36px rgba(7, 20, 45, 0.06);
-      color: #1647b8;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      animation: fadeUp 0.7s ease forwards;
-    }
-
-    .badge span {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--cyan);
-      box-shadow: 0 0 18px var(--cyan);
-    }
-
-    h1 {
-      font-size: clamp(52px, 6vw, 84px);
-      line-height: 0.96;
-      letter-spacing: -0.065em;
-      font-weight: 900;
-      color: #061127;
-      animation: fadeUp 0.7s 0.1s ease both;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #2563eb, #4f46e5, #7c3aed);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin-top: 30px;
-      font-size: 20px;
-      line-height: 1.8;
-      color: #344766;
-      animation: fadeUp 0.7s 0.2s ease both;
-    }
-
-    .hero-actions {
-      margin-top: 40px;
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      animation: fadeUp 0.7s 0.3s ease both;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      padding: 0 28px;
-      border-radius: 15px;
-      font-weight: 800;
-      transition: 0.25s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, var(--blue), var(--violet));
-      color: white;
-      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.22);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    .capabilities-card {
-      position: relative;
-      padding: 34px;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: var(--shadow);
-      animation: fadeScale 0.8s 0.2s ease both;
-      overflow: hidden;
-    }
-
-    .capabilities-card::before {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      right: -110px;
-      top: -110px;
-      background: radial-gradient(circle, rgba(24, 168, 255, 0.18), transparent 70%);
-      pointer-events: none;
-    }
-
-    .capabilities-card h2 {
-      position: relative;
-      font-size: 27px;
-      margin-bottom: 24px;
-      letter-spacing: -0.03em;
-    }
-
-    .capability-box {
-      position: relative;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      background: #f8fbff;
-      margin-bottom: 18px;
-      transition: 0.25s ease;
-    }
-
-    .capability-box:hover {
-      transform: translateY(-4px);
-      border-color: rgba(37, 99, 235, 0.26);
-      box-shadow: 0 18px 42px rgba(7, 20, 45, 0.07);
-    }
-
-    .capability-box h3 {
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
-
-    .capability-box p {
-      color: #52627a;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .section-block {
-      padding: 110px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section-head {
-      max-width: 780px;
-      margin-bottom: 44px;
-    }
-
-    .eyebrow {
-      color: var(--blue);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(36px, 4vw, 56px);
-      line-height: 1.02;
-      letter-spacing: -0.055em;
-      margin-bottom: 18px;
-      color: #061127;
-    }
-
-    .section-head p {
-      color: #52627a;
-      font-size: 18px;
-      line-height: 1.8;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .service-card,
-    .mini-card {
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 16px 44px rgba(7, 20, 45, 0.05);
-      transition: 0.25s ease;
-    }
-
-    .service-card:hover,
-    .mini-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(37, 99, 235, 0.25);
-      box-shadow: 0 22px 60px rgba(7, 20, 45, 0.09);
-    }
-
-    .icon {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(124,58,237,0.10));
-      color: var(--blue);
-      font-size: 22px;
-      font-weight: 900;
-      margin-bottom: 20px;
-    }
-
-    .service-card h3,
-    .mini-card h3 {
-      font-size: 22px;
-      margin-bottom: 12px;
-      letter-spacing: -0.03em;
-    }
-
-    .service-card p,
-    .mini-card p {
-      color: #52627a;
-      font-size: 15px;
-      line-height: 1.75;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .process-panel {
-      padding: 28px;
-      border-radius: 28px;
-      background: #061127;
-      color: white;
-      box-shadow: 0 24px 70px rgba(7, 20, 45, 0.18);
-    }
-
-    .process-step {
-      padding: 20px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.06);
-      border-radius: 18px;
-      margin-bottom: 16px;
-    }
-
-    .process-step:last-child {
-      margin-bottom: 0;
-    }
-
-    .process-step h3 {
-      color: white;
-      margin-bottom: 7px;
-      font-size: 18px;
-    }
-
-    .process-step p {
-      color: rgba(255,255,255,0.68);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .contact-section {
-      padding: 100px 0;
-      background: #061127;
-      color: white;
-    }
-
-    .contact-box {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 30px;
-      align-items: center;
-      padding: 44px;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 28px;
-      background: rgba(255,255,255,0.05);
-    }
-
-    .contact-box h2 {
-      font-size: clamp(34px, 4vw, 52px);
-      letter-spacing: -0.05em;
-      margin-bottom: 12px;
-    }
-
-    .contact-box p {
-      color: rgba(255,255,255,0.68);
-      font-size: 18px;
-      line-height: 1.75;
-      max-width: 720px;
-    }
-
-    footer {
-      padding: 26px 56px;
-      border-top: 1px solid var(--line);
-      background: white;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 22px;
-      flex-wrap: wrap;
-    }
-
-    .footer-logo {
-      width: 220px;
-      height: 60px;
-      overflow: visible;
-      display: flex;
-      align-items: center;
-    }
-
-    .footer-logo img {
-      width: 220px;
-      height: auto;
-      display: block;
-    }
-
-    .footer-text {
-      color: #64748b;
-      font-size: 14px;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeScale {
-      from { opacity: 0; transform: translateY(24px) scale(0.96); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @media (max-width: 950px) {
-      nav {
-        height: auto;
-        padding: 14px 22px;
-      }
-
-      .logo,
-      .logo img {
-        width: 210px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 130px;
-      }
-
-      .hero-grid,
-      .split,
-      .contact-box {
-        grid-template-columns: 1fr;
-      }
-
-      .grid-3,
-      .grid-4 {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 48px;
-      }
-
-      footer {
-        padding: 26px 22px;
-      }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CX2Space — AI Automation & Cyber Operations</title>
+<meta name="description" content="CX2Space delivers AI automation, cybersecurity operations, and intelligent workflow systems."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0C0C0C;font-family:'Kanit',sans-serif;overflow-x:hidden;scroll-behavior:smooth}
+
+/* ── GRADIENT TEXT ── */
+.hero-heading{
+  background:linear-gradient(180deg,#646973 0%,#BBCCD7 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#0C0C0C}
+::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:2px}
+
+/* ── FADE IN (JS-driven) ── */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.25,.1,.25,1),transform .7s cubic-bezier(.25,.1,.25,1)}
+.fade-in.fade-in-x-left{transform:translateX(-80px)}
+.fade-in.fade-in-x-right{transform:translateX(80px)}
+.fade-in.visible{opacity:1;transform:translate(0,0)}
+
+/* ════════════════════════════════
+   1. HERO
+════════════════════════════════ */
+#hero{
+  height:100vh;display:flex;flex-direction:column;
+  overflow:hidden;background:#0C0C0C;position:relative;
+}
+
+/* NAV */
+.hero-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:clamp(16px,4vw,28px) clamp(16px,5vw,48px);
+  position:relative;z-index:20;
+}
+.hero-nav a{
+  color:#D7E2EA;font-weight:500;text-transform:uppercase;
+  letter-spacing:.1em;font-size:clamp(.75rem,1.4vw,1.3rem);
+  text-decoration:none;transition:opacity .2s;
+}
+.hero-nav a:hover{opacity:.5}
+
+/* HEADING */
+.hero-h1-wrap{overflow:hidden}
+.hero-h1{
+  font-weight:900;text-transform:uppercase;
+  letter-spacing:-.03em;line-height:1;
+  white-space:nowrap;width:100%;
+  font-size:clamp(12vw,17.5vw,17.5vw);
+  padding-left:clamp(12px,3vw,40px);
+  display:block;
+}
+
+/* HERO LOGO MARK — centered absolutely */
+.hero-mark-wrap{
+  position:absolute;left:50%;transform:translateX(-50%);
+  bottom:0;z-index:10;
+  width:clamp(180px,32vw,460px);
+}
+.hero-mark-wrap svg{width:100%;height:auto;display:block}
+
+/* MAGNET wrapper */
+.magnet{display:inline-block;will-change:transform;transition:transform .6s ease-in-out}
+
+/* BOTTOM BAR */
+.hero-bottom{
+  margin-top:auto;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 clamp(12px,4vw,48px) clamp(20px,4vw,36px);
+  position:relative;z-index:20;
+}
+.hero-tagline{
+  color:#D7E2EA;font-weight:300;text-transform:uppercase;
+  letter-spacing:.06em;line-height:1.3;
+  font-size:clamp(.65rem,1.4vw,1.2rem);
+  max-width:clamp(130px,18vw,250px);
+}
+
+/* CONTACT BUTTON */
+.btn-contact{
+  background:linear-gradient(123deg,#18011F 7%,#B600A8 37%,#7621B0 72%,#BE4C00 100%);
+  box-shadow:0 4px 4px rgba(181,1,167,.25),inset 4px 4px 12px #7721B1;
+  outline:2px solid white;outline-offset:-3px;
+  border-radius:9999px;border:none;
+  color:white;font-family:'Kanit',sans-serif;font-weight:500;
+  text-transform:uppercase;letter-spacing:.12em;
+  padding:clamp(10px,1.5vw,16px) clamp(24px,4vw,48px);
+  font-size:clamp(.7rem,1.2vw,.95rem);
+  cursor:pointer;transition:transform .2s;flex-shrink:0;
+}
+.btn-contact:hover{transform:scale(1.04)}
+
+/* ════════════════════════════════
+   2. MARQUEE
+════════════════════════════════ */
+#marquee{
+  background:#0C0C0C;
+  padding:clamp(50px,8vw,100px) 0 32px;
+  overflow:hidden;
+}
+.marquee-row{display:flex;gap:12px;margin-bottom:12px;will-change:transform}
+.marquee-pill{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(187,204,215,.18);border-radius:9999px;
+  padding:14px 28px;flex-shrink:0;
+  white-space:nowrap;
+}
+.marquee-pill-star{font-size:18px}
+.marquee-pill-text{
+  color:#D7E2EA;font-weight:500;text-transform:uppercase;
+  letter-spacing:.08em;font-size:clamp(.75rem,1.1vw,1rem);
+}
+
+/* ════════════════════════════════
+   3. ABOUT
+════════════════════════════════ */
+#about{
+  min-height:100vh;background:#0C0C0C;position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:clamp(60px,8vw,120px) clamp(16px,5vw,48px);
+  overflow:hidden;
+}
+.about-corner{position:absolute;pointer-events:none;opacity:.55}
+.about-corner.tl{top:4%;left:4%}
+.about-corner.tr{top:4%;right:4%}
+.about-corner.bl{bottom:8%;left:6%}
+.about-corner.br{bottom:8%;right:6%}
+
+.about-inner{
+  display:flex;flex-direction:column;align-items:center;
+  gap:clamp(28px,5vw,60px);z-index:2;
+}
+.about-h2{
+  font-weight:900;text-transform:uppercase;
+  line-height:1;letter-spacing:-.03em;text-align:center;
+  font-size:clamp(3rem,12vw,140px);
+}
+
+/* Animated text — JS drives opacity per char */
+.anim-text{
+  color:#D7E2EA;font-weight:500;text-align:center;
+  line-height:1.65;max-width:580px;
+  font-size:clamp(.95rem,2vw,1.3rem);
+  position:relative;
+}
+.anim-char{
+  position:relative;display:inline-block;
+}
+.anim-char .placeholder{opacity:0;pointer-events:none}
+.anim-char .live{
+  position:absolute;left:0;top:0;
+  opacity:.15;
+  transition:opacity .1s;
+  color:#D7E2EA;
+}
+
+/* ════════════════════════════════
+   4. SERVICES
+════════════════════════════════ */
+#services{
+  background:#FFFFFF;
+  border-radius:clamp(40px,5vw,60px) clamp(40px,5vw,60px) 0 0;
+  padding:clamp(60px,7vw,120px) clamp(16px,5vw,48px);
+}
+.services-h2{
+  font-weight:900;text-transform:uppercase;text-align:center;
+  color:#0C0C0C;line-height:1;letter-spacing:-.03em;
+  font-size:clamp(3rem,12vw,140px);
+  margin-bottom:clamp(40px,6vw,80px);
+}
+.services-list{max-width:900px;margin:0 auto}
+.service-item{
+  display:flex;align-items:flex-start;
+  gap:clamp(12px,3vw,36px);
+  padding:clamp(24px,4vw,44px) 0;
+  border-bottom:1px solid rgba(12,12,12,.15);
+}
+.service-item:first-child{border-top:1px solid rgba(12,12,12,.15)}
+.service-num{
+  font-weight:900;color:#0C0C0C;line-height:1;
+  font-size:clamp(2.2rem,7vw,110px);
+  opacity:.1;flex-shrink:0;
+}
+.service-body{padding-top:clamp(3px,.6vw,10px)}
+.service-name{
+  font-weight:500;text-transform:uppercase;color:#0C0C0C;
+  margin-bottom:8px;font-size:clamp(.95rem,2.2vw,2rem);
+}
+.service-desc{
+  font-weight:300;color:#0C0C0C;opacity:.6;
+  line-height:1.65;max-width:540px;
+  font-size:clamp(.8rem,1.5vw,1.15rem);
+}
+
+/* ════════════════════════════════
+   5. PROJECTS
+════════════════════════════════ */
+#projects{
+  background:#0C0C0C;
+  border-radius:clamp(40px,5vw,60px) clamp(40px,5vw,60px) 0 0;
+  margin-top:clamp(-40px,-5vw,-56px);
+  position:relative;z-index:10;
+  padding:clamp(60px,7vw,100px) clamp(16px,5vw,48px) clamp(80px,8vw,140px);
+}
+.projects-h2{
+  font-weight:900;text-transform:uppercase;line-height:1;
+  letter-spacing:-.03em;text-align:center;
+  font-size:clamp(3rem,12vw,140px);
+  margin-bottom:clamp(40px,5vw,72px);
+}
+
+/* sticky card stacking */
+.project-track{height:85vh;display:flex;justify-content:center}
+.project-card{
+  position:sticky;
+  width:100%;max-width:1080px;
+  background:#0C0C0C;border:2px solid #D7E2EA;
+  border-radius:clamp(36px,5vw,56px);
+  padding:clamp(14px,2.5vw,28px);
+  transform-origin:top center;
+  will-change:transform;
+}
+.card-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:clamp(10px,1.5vw,20px);flex-wrap:wrap;gap:10px;
+}
+.card-header-left{display:flex;align-items:center;gap:clamp(10px,2vw,24px)}
+.card-num{
+  font-weight:900;line-height:1;
+  font-size:clamp(2rem,6vw,88px);
+}
+.card-type{
+  color:#646973;text-transform:uppercase;
+  letter-spacing:.1em;font-size:clamp(.65rem,.9vw,.85rem);
+  font-weight:500;margin-bottom:4px;
+}
+.card-name{
+  color:#D7E2EA;font-weight:700;text-transform:uppercase;
+  letter-spacing:.05em;font-size:clamp(.9rem,2.2vw,1.8rem);
+}
+.btn-live{
+  border-radius:9999px;border:2px solid #D7E2EA;
+  background:transparent;color:#D7E2EA;
+  font-family:'Kanit',sans-serif;font-weight:500;
+  text-transform:uppercase;letter-spacing:.12em;
+  padding:9px 24px;font-size:clamp(.65rem,.9vw,.85rem);
+  cursor:pointer;transition:background .2s;flex-shrink:0;
+}
+.btn-live:hover{background:rgba(215,226,234,.1)}
+.card-images{display:flex;gap:clamp(6px,1.2vw,14px)}
+.card-col-left{width:40%;display:flex;flex-direction:column;gap:clamp(6px,1.2vw,14px)}
+.card-col-right{width:60%}
+.card-img{
+  border-radius:clamp(18px,3.5vw,44px);
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.card-img-label{
+  color:rgba(255,255,255,.25);font-size:clamp(.7rem,1.4vw,.9rem);
+  font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+}
+.card-img svg{width:78%;max-width:260px;opacity:.55}
+
+/* ════════════════════════════════
+   6. FOOTER
+════════════════════════════════ */
+#contact{
+  background:#0C0C0C;text-align:center;
+  padding:clamp(80px,10vw,140px) clamp(16px,5vw,48px);
+}
+.footer-h2{
+  font-weight:900;text-transform:uppercase;
+  line-height:1;letter-spacing:-.03em;
+  font-size:clamp(1.8rem,8vw,90px);
+  margin-bottom:clamp(28px,4vw,48px);
+}
+.footer-sub{
+  color:#646973;font-weight:300;
+  font-size:clamp(.8rem,1.4vw,1.1rem);
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:clamp(28px,3vw,40px);
+}
+.footer-copy{
+  color:rgba(100,105,115,.35);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-top:clamp(60px,7vw,100px);
+}
+
+@media(max-width:640px){
+  .hero-nav{gap:8px}
+  .card-header{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 <body>
-  <nav>
-    <a href="#home" class="logo" aria-label="CX2Space Home">
-      <img src="/cx2space-logo.png" alt="CX2Space Logo" />
-    </a>
 
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#automation">Automation</a>
-      <a href="#cybersecurity">Cybersecurity</a>
-      <a href="#training">Training</a>
-      <a class="nav-cta" href="#contact">Contact</a>
-    </div>
+<!-- ════════ 1. HERO ════════ -->
+<section id="hero">
+  <!-- NAV -->
+  <nav class="hero-nav fade-in" data-delay="0" data-dir="up" style="--fd:-20px">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
   </nav>
 
-  <section id="home" class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="badge"><span></span> AI automation · Cyber operations · Practical capability</div>
-        <h1>AI Systems.<br />Cyber Operations.<br /><span class="gradient-text">Built for Modern Business.</span></h1>
-        <p>CX2Space delivers advanced AI automation, cybersecurity operations, digital infrastructure, threat intelligence, and intelligent workflow systems designed for organisations that want modern capability without enterprise complexity.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Book Consultation</a>
-          <a href="#services" class="btn btn-secondary">Explore Services</a>
-        </div>
-      </div>
+  <!-- HEADING -->
+  <div class="hero-h1-wrap fade-in" data-delay="150">
+    <h1 class="hero-h1 hero-heading">CX2SPACE</h1>
+  </div>
 
-      <div class="capabilities-card">
-        <h2>Core Capabilities</h2>
-        <div class="capability-box">
-          <h3>AI Automation Systems</h3>
-          <p>Operational automation, AI workflow orchestration, intelligent assistants, reporting systems, and business process acceleration.</p>
-        </div>
-        <div class="capability-box">
-          <h3>Cybersecurity Operations</h3>
-          <p>Threat hunting, incident response support, threat intelligence, phishing simulations, and security investigation workflows.</p>
-        </div>
-        <div class="capability-box">
-          <h3>AI-Powered Security Solutions</h3>
-          <p>Security-focused AI agents, monitoring workflows, intelligence correlation, investigation assistance, and operational automation.</p>
-        </div>
-      </div>
+  <!-- MAGNETIC LOGO MARK -->
+  <div class="hero-mark-wrap fade-in" data-delay="600" id="hero-mark">
+    <div class="magnet" id="magnet-el">
+      <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="45%" r="50%">
+            <stop offset="0%" stop-color="#B600A8" stop-opacity=".35"/>
+            <stop offset="100%" stop-color="#0C0C0C" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="cgrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#646973"/>
+            <stop offset="100%" stop-color="#BBCCD7"/>
+          </linearGradient>
+          <linearGradient id="xgrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#BBCCD7"/>
+            <stop offset="100%" stop-color="#646973"/>
+          </linearGradient>
+        </defs>
+        <!-- glow blob -->
+        <ellipse cx="200" cy="200" rx="190" ry="180" fill="url(#glow)"/>
+        <!-- big C -->
+        <path d="M285 80 A140 140 0 1 0 285 330"
+          stroke="url(#cgrad)" stroke-width="30" fill="none" stroke-linecap="butt"/>
+        <!-- inner C edge highlight -->
+        <path d="M275 105 A115 115 0 1 0 275 305"
+          stroke="rgba(187,204,215,0.12)" stroke-width="1.5" fill="none" stroke-linecap="butt"/>
+        <!-- X left-to-right -->
+        <line x1="255" y1="118" x2="355" y2="295"
+          stroke="url(#cgrad)" stroke-width="26" stroke-linecap="round"/>
+        <!-- X right-to-left -->
+        <line x1="355" y1="118" x2="255" y2="295"
+          stroke="url(#xgrad)" stroke-width="26" stroke-linecap="round"/>
+        <!-- X centre white knockout -->
+        <circle cx="305" cy="207" r="14" fill="#0C0C0C"/>
+        <!-- 2 subscript -->
+        <text x="308" y="370" font-family="Kanit" font-size="54" font-weight="900"
+          fill="url(#cgrad)" text-anchor="middle">2</text>
+        <!-- ground shadow ellipse -->
+        <ellipse cx="200" cy="400" rx="130" ry="14"
+          fill="rgba(187,204,215,0.06)"/>
+      </svg>
     </div>
-  </section>
+  </div>
 
-  <section id="services" class="section-block">
-    <div class="container">
-      <div class="section-head">
-        <div class="eyebrow">Services</div>
-        <h2>Advanced automation and cybersecurity capability in one focused technology partner.</h2>
-        <p>CX2Space supports modern organisations through AI automation, cyber operations support, practical cybersecurity training, digital workflow engineering, and security-aware technology delivery.</p>
-      </div>
-
-      <div class="grid-3">
-        <div class="service-card">
-          <div class="icon">AI</div>
-          <h3>AI Automation</h3>
-          <p>Workflow orchestration, intelligent assistants, automated reporting, document processing, business process automation, and AI-enabled operational systems.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">SEC</div>
-          <h3>Cyber Operations</h3>
-          <p>Threat intelligence, threat hunting, phishing simulations, incident response support, security investigations, and cyber readiness workflows.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">LAB</div>
-          <h3>Cyber Training</h3>
-          <p>Practical SOC analyst training, alert investigation labs, case-study learning, phishing awareness, and career-ready cybersecurity skills.</p>
-        </div>
-      </div>
+  <!-- BOTTOM BAR -->
+  <div class="hero-bottom">
+    <p class="hero-tagline fade-in" data-delay="350">
+      AI automation &amp; cybersecurity — built for modern business
+    </p>
+    <div class="fade-in" data-delay="500">
+      <button class="btn-contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Contact Us
+      </button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="automation" class="section-block">
-    <div class="container split">
-      <div class="section-head">
-        <div class="eyebrow">Automation</div>
-        <h2>Intelligent workflows that do more than answer prompts.</h2>
-        <p>CX2Space designs AI-enabled systems around process, context, data movement, approvals, reporting, and repeatable business logic.</p>
-      </div>
+<!-- ════════ 2. MARQUEE ════════ -->
+<section id="marquee">
+  <div class="marquee-row" id="mrow1"></div>
+  <div class="marquee-row" id="mrow2"></div>
+</section>
 
-      <div class="process-panel">
-        <div class="process-step">
-          <h3>Workflow Intelligence</h3>
-          <p>Structured systems that map tasks, inputs, outputs, owners, approvals, and decision points.</p>
-        </div>
-        <div class="process-step">
-          <h3>Document & Knowledge Automation</h3>
-          <p>Extraction, transformation, comparison, summarisation, and generation across business information flows.</p>
-        </div>
-        <div class="process-step">
-          <h3>Connected Operating Layers</h3>
-          <p>Automations that connect email, forms, spreadsheets, CRMs, reporting tools, portals, and internal processes.</p>
-        </div>
-        <div class="process-step">
-          <h3>Controlled AI Agents</h3>
-          <p>Task-specific AI agents with guardrails, approvals, audit trails, and human oversight.</p>
-        </div>
-      </div>
+<!-- ════════ 3. ABOUT ════════ -->
+<section id="about">
+  <!-- corner decorations -->
+  <div class="about-corner tl fade-in" data-dir="x-left" data-delay="100">
+    <svg width="clamp(100px,14vw,200px)" viewBox="0 0 180 180" fill="none">
+      <circle cx="90" cy="90" r="70" stroke="rgba(187,204,215,.18)" stroke-width="1"/>
+      <circle cx="90" cy="90" r="45" stroke="rgba(182,0,168,.28)" stroke-width="1"/>
+      <circle cx="90" cy="90" r="9" fill="#B600A8" opacity=".55"/>
+      <circle cx="90" cy="90" r="3" fill="#fff" opacity=".8"/>
+    </svg>
+  </div>
+  <div class="about-corner tr fade-in" data-dir="x-right" data-delay="150">
+    <svg width="clamp(100px,14vw,200px)" viewBox="0 0 180 180" fill="none">
+      <rect x="45" y="45" width="90" height="90" rx="10"
+        stroke="rgba(187,204,215,.18)" stroke-width="1" transform="rotate(45 90 90)"/>
+      <rect x="60" y="60" width="60" height="60" rx="5"
+        stroke="rgba(118,33,176,.35)" stroke-width="1" transform="rotate(45 90 90)"/>
+      <circle cx="90" cy="90" r="7" fill="#7621B0" opacity=".6"/>
+    </svg>
+  </div>
+  <div class="about-corner bl fade-in" data-dir="x-left" data-delay="250">
+    <svg width="clamp(80px,11vw,160px)" viewBox="0 0 140 140" fill="none">
+      <polygon points="70,12 128,102 12,102"
+        stroke="rgba(187,204,215,.15)" stroke-width="1"/>
+      <polygon points="70,34 104,90 36,90"
+        stroke="rgba(190,76,0,.35)" stroke-width="1"/>
+      <circle cx="70" cy="72" r="5" fill="#BE4C00" opacity=".55"/>
+    </svg>
+  </div>
+  <div class="about-corner br fade-in" data-dir="x-right" data-delay="300">
+    <svg width="clamp(80px,11vw,160px)" viewBox="0 0 160 160" fill="none">
+      <path d="M80 12L148 52L148 108L80 148L12 108L12 52Z"
+        stroke="rgba(187,204,215,.15)" stroke-width="1"/>
+      <path d="M80 34L122 58L122 102L80 126L38 102L38 58Z"
+        stroke="rgba(182,0,168,.22)" stroke-width="1"/>
+      <circle cx="80" cy="80" r="8" fill="rgba(118,33,176,.45)"/>
+    </svg>
+  </div>
+
+  <div class="about-inner">
+    <h2 class="about-h2 hero-heading fade-in" data-delay="0">About us</h2>
+
+    <p class="anim-text" id="about-text">CX2Space delivers advanced AI automation and cybersecurity services for organisations that want modern capability without enterprise complexity. We focus on practical, deployable solutions — from intelligent workflow systems to threat hunting and incident response — built for real-world results.</p>
+
+    <div class="fade-in" data-delay="400">
+      <button class="btn-contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Contact Us
+      </button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="cybersecurity" class="section-block">
-    <div class="container">
-      <div class="section-head">
-        <div class="eyebrow">Cybersecurity</div>
-        <h2>Cyber readiness across awareness, intelligence, hunting, and response support.</h2>
-        <p>CX2Space supports security-focused work through investigation, awareness, intelligence review, AI-assisted workflows, and practical cyber operations capability.</p>
-      </div>
+<!-- ════════ 4. SERVICES ════════ -->
+<section id="services">
+  <h2 class="services-h2 fade-in" data-delay="0">Services</h2>
+  <div class="services-list" id="services-list"></div>
+</section>
 
-      <div class="grid-4">
-        <div class="mini-card">
-          <div class="icon">PH</div>
-          <h3>Phishing Simulation</h3>
-          <p>Controlled campaigns, awareness training, staff readiness checks, and clear management reporting.</p>
-        </div>
-        <div class="mini-card">
-          <div class="icon">TI</div>
-          <h3>Threat Intelligence</h3>
-          <p>Threat research, external intelligence review, exposed-data analysis, and cyber risk context.</p>
-        </div>
-        <div class="mini-card">
-          <div class="icon">HT</div>
-          <h3>Threat Hunting</h3>
-          <p>Investigation support across suspicious users, endpoints, network signals, and intelligence leads.</p>
-        </div>
-        <div class="mini-card">
-          <div class="icon">IR</div>
-          <h3>Incident Support</h3>
-          <p>Triage, evidence review, reporting, and response coordination support.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ════════ 5. PROJECTS ════════ -->
+<section id="projects">
+  <h2 class="projects-h2 hero-heading fade-in" data-delay="0">Projects</h2>
+  <div id="projects-list"></div>
+</section>
 
-  <section id="training" class="section-block">
-    <div class="container">
-      <div class="section-head">
-        <div class="eyebrow">Training</div>
-        <h2>Practical cybersecurity training built around how security work is actually performed.</h2>
-        <p>CX2Space training helps learners think like analysts: review evidence, investigate alerts, understand attacker behaviour, and communicate findings with confidence.</p>
-      </div>
+<!-- ════════ 6. FOOTER ════════ -->
+<section id="contact">
+  <h2 class="footer-h2 hero-heading fade-in" data-delay="0">
+    Let&apos;s build<br/>something sharp.
+  </h2>
+  <p class="footer-sub fade-in" data-delay="150">
+    AI automation · Cyber operations · Security training
+  </p>
+  <div class="fade-in" data-delay="300">
+    <button class="btn-contact">Contact Us</button>
+  </div>
+  <p class="footer-copy fade-in" data-delay="500">
+    © 2026 CX2Space · Auckland, New Zealand
+  </p>
+</section>
 
-      <div class="grid-3">
-        <div class="service-card">
-          <div class="icon">01</div>
-          <h3>SOC Foundations</h3>
-          <p>How alerts, logs, users, devices, and incidents connect inside real security operations.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">02</div>
-          <h3>Investigation Practice</h3>
-          <p>Hands-on examples using realistic alert scenarios, phishing cases, endpoint events, and timelines.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">03</div>
-          <h3>Career Readiness</h3>
-          <p>Analyst thinking, reporting, communication, interview preparation, and practical cyber skill-building.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<script>
+/* ══════════════════════════════════
+   DATA
+══════════════════════════════════ */
+const SERVICES = [
+  { n:"01", name:"AI Automation", desc:"Intelligent workflow systems that connect processes, documents, communication channels, data, approvals, and reporting into cleaner operating environments." },
+  { n:"02", name:"Cyber Operations", desc:"Threat intelligence, threat hunting, phishing simulations, incident response, deep/dark web investigation, and AI-assisted security workflows." },
+  { n:"03", name:"Incident Response", desc:"Rapid triage, containment, evidence review, reporting, and response coordination when a security incident occurs — fast and decisive." },
+  { n:"04", name:"Security Training", desc:"Hands-on SOC analyst training, alert investigation labs, phishing awareness campaigns, and career-ready cybersecurity skill development." },
+  { n:"05", name:"Workflow Intelligence", desc:"Structured AI systems that map tasks, inputs, outputs, owners, approvals, and decision points — built around how operations actually run." },
+];
 
-  <section id="contact" class="contact-section">
-    <div class="container contact-box">
-      <div>
-        <h2>Start with a direct conversation.</h2>
-        <p>Discuss AI automation, cyber readiness, training, or a specific operational challenge that needs a sharper solution.</p>
-      </div>
-      <a href="mailto:Info@cx2space.com" class="btn btn-primary">info@cx2space.com</a>
-    </div>
-  </section>
+const PROJECTS = [
+  {
+    n:"01", name:"AI Workflow Engine", type:"Product",
+    accent:"#B600A8",
+    colors:["linear-gradient(135deg,#18011F,#3a0050)","linear-gradient(135deg,#0a0014,#200040)","linear-gradient(135deg,#0C0C0C,#1a0535)"],
+    tags:["AUTOMATE","CONNECT"],
+    nodes:[
+      {x:10,y:28,w:82,h:32,label:"Email / Forms"},
+      {x:10,y:72,w:82,h:32,label:"Documents"},
+      {x:10,y:116,w:82,h:32,label:"CRM / API"},
+      {x:208,y:28,w:82,h:32,label:"Responses"},
+      {x:208,y:72,w:82,h:32,label:"Reports"},
+      {x:208,y:116,w:82,h:32,label:"Triggers"},
+    ],
+    lines:[
+      [91,44,126,96],[91,88,126,96],[91,132,126,96],
+      [174,96,208,44],[174,96,208,88],[174,96,208,132],
+    ],
+  },
+  {
+    n:"02", name:"Threat Hunt Ops", type:"Cybersecurity",
+    accent:"#1a6fd4",
+    colors:["linear-gradient(135deg,#0a1628,#1a6fd4)","linear-gradient(135deg,#0C0C0C,#0a2040)","linear-gradient(135deg,#060e1c,#10224a)"],
+    tags:["DETECT","RESPOND"],
+    nodes:[
+      {x:10,y:28,w:82,h:32,label:"Endpoints"},
+      {x:10,y:72,w:82,h:32,label:"Network"},
+      {x:10,y:116,w:82,h:32,label:"Identity"},
+      {x:208,y:28,w:82,h:32,label:"Alerts"},
+      {x:208,y:72,w:82,h:32,label:"IR Report"},
+      {x:208,y:116,w:82,h:32,label:"Contain"},
+    ],
+    lines:[
+      [91,44,126,96],[91,88,126,96],[91,132,126,96],
+      [174,96,208,44],[174,96,208,88],[174,96,208,132],
+    ],
+  },
+  {
+    n:"03", name:"SOC Training Lab", type:"Education",
+    accent:"#22c55e",
+    colors:["linear-gradient(135deg,#0a1f0a,#1a5020)","linear-gradient(135deg,#0C0C0C,#0a1f0a)","linear-gradient(135deg,#050f05,#0d2515)"],
+    tags:["LEARN","PRACTICE"],
+    nodes:[
+      {x:10,y:28,w:82,h:32,label:"Alerts"},
+      {x:10,y:72,w:82,h:32,label:"Logs"},
+      {x:10,y:116,w:82,h:32,label:"Cases"},
+      {x:208,y:28,w:82,h:32,label:"Analysis"},
+      {x:208,y:72,w:82,h:32,label:"Report"},
+      {x:208,y:116,w:82,h:32,label:"Skills"},
+    ],
+    lines:[
+      [91,44,126,96],[91,88,126,96],[91,132,126,96],
+      [174,96,208,44],[174,96,208,88],[174,96,208,132],
+    ],
+  },
+];
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">
-        <img src="/cx2space-logo.png" alt="CX2Space Logo" />
+const MARQUEE_ITEMS = [
+  "AI Automation","Cyber Operations","Threat Hunting","Incident Response",
+  "SOC Training","Phishing Simulation","Workflow Intelligence","AI Agents",
+  "Dark Web Investigation","Security Awareness","Document Automation","Career Readiness",
+];
+
+/* ══════════════════════════════════
+   BUILD SERVICES LIST
+══════════════════════════════════ */
+const sl = document.getElementById('services-list');
+SERVICES.forEach((s,i) => {
+  const el = document.createElement('div');
+  el.className = 'service-item fade-in';
+  el.dataset.delay = i * 100;
+  el.innerHTML = `
+    <div class="service-num">${s.n}</div>
+    <div class="service-body">
+      <div class="service-name">${s.name}</div>
+      <div class="service-desc">${s.desc}</div>
+    </div>`;
+  sl.appendChild(el);
+});
+
+/* ══════════════════════════════════
+   BUILD PROJECTS
+══════════════════════════════════ */
+const pl = document.getElementById('projects-list');
+PROJECTS.forEach((p, i) => {
+  const track = document.createElement('div');
+  track.className = 'project-track';
+
+  // SVG flow diagram markup
+  const svgNodes = p.nodes.map(n =>
+    `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="8"
+      fill="rgba(187,204,215,0.07)" stroke="rgba(187,204,215,0.2)" stroke-width="1"/>
+     <text x="${n.x + n.w/2}" y="${n.y + n.h/2 + 4}" text-anchor="middle"
+      fill="#D7E2EA" font-family="Kanit" font-size="9" font-weight="500">${n.label}</text>`
+  ).join('');
+
+  const svgLines = p.lines.map(l =>
+    `<line x1="${l[0]}" y1="${l[1]}" x2="${l[2]}" y2="${l[3]}"
+      stroke="rgba(187,204,215,0.2)" stroke-width="1" stroke-dasharray="4 3"/>`
+  ).join('');
+
+  const cardTop = 96 + i * 28;
+
+  track.innerHTML = `
+    <div class="project-card" id="pcard-${i}" style="top:${cardTop}px">
+      <div class="card-header">
+        <div class="card-header-left">
+          <span class="card-num hero-heading">${p.n}</span>
+          <div>
+            <div class="card-type">${p.type}</div>
+            <div class="card-name">${p.name}</div>
+          </div>
+        </div>
+        <button class="btn-live">Live Project</button>
       </div>
-      <div class="footer-text">© 2026 CX2Space. All rights reserved.</div>
-      <div class="footer-text">AI automation · Cyber operations · Practical cybersecurity training</div>
-    </div>
-  </footer>
+      <div class="card-images">
+        <div class="card-col-left">
+          <div class="card-img" style="height:clamp(110px,13vw,190px);background:${p.colors[0]}">
+            <span class="card-img-label">${p.tags[0]}</span>
+          </div>
+          <div class="card-img" style="height:clamp(140px,19vw,280px);background:${p.colors[1]}">
+            <span class="card-img-label">${p.tags[1]}</span>
+          </div>
+        </div>
+        <div class="card-col-right">
+          <div class="card-img" style="height:100%;min-height:clamp(270px,34vw,490px);background:${p.colors[2]};flex-direction:column;gap:14px">
+            <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:78%;max-width:260px;opacity:.55">
+              ${svgNodes}
+              ${svgLines}
+              <circle cx="150" cy="80" r="22" fill="${p.accent}" opacity=".85"/>
+              <text x="150" y="84" text-anchor="middle" fill="white"
+                font-family="Kanit" font-size="10" font-weight="700">CX2</text>
+            </svg>
+            <span style="color:rgba(255,255,255,.22);font-size:clamp(.65rem,1.2vw,.85rem);font-weight:500;text-transform:uppercase;letter-spacing:.1em">${p.name}</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  pl.appendChild(track);
+});
+
+/* ══════════════════════════════════
+   BUILD MARQUEE
+══════════════════════════════════ */
+const ACCENT_COLORS = ['#B600A8','#646973','#7621B0','#646973','#BE4C00','#646973'];
+function buildRow(containerId, items) {
+  const container = document.getElementById(containerId);
+  const tripled = [...items, ...items, ...items];
+  tripled.forEach((item, i) => {
+    const pill = document.createElement('div');
+    pill.className = 'marquee-pill';
+    pill.innerHTML = `
+      <span class="marquee-pill-star" style="color:${ACCENT_COLORS[i % ACCENT_COLORS.length]}">✦</span>
+      <span class="marquee-pill-text">${item}</span>`;
+    container.appendChild(pill);
+  });
+}
+buildRow('mrow1', MARQUEE_ITEMS.slice(0, 7));
+buildRow('mrow2', MARQUEE_ITEMS.slice(7));
+
+/* ══════════════════════════════════
+   MARQUEE SCROLL ANIMATION
+══════════════════════════════════ */
+const mSection = document.getElementById('marquee');
+const mRow1 = document.getElementById('mrow1');
+const mRow2 = document.getElementById('mrow2');
+
+window.addEventListener('scroll', () => {
+  const rect = mSection.getBoundingClientRect();
+  const sectionTop = window.scrollY + rect.top;
+  const offset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+  mRow1.style.transform = `translateX(${offset - 200}px)`;
+  mRow2.style.transform = `translateX(${-(offset - 200)}px)`;
+}, { passive: true });
+
+/* ══════════════════════════════════
+   MAGNETIC EFFECT
+══════════════════════════════════ */
+const magnetEl = document.getElementById('magnet-el');
+const magnetWrap = document.getElementById('hero-mark');
+
+window.addEventListener('mousemove', (e) => {
+  if (!magnetWrap) return;
+  const rect = magnetWrap.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const dx = e.clientX - cx;
+  const dy = e.clientY - cy;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  const threshold = Math.max(rect.width, rect.height) / 2 + 150;
+
+  if (dist < threshold) {
+    const x = dx / 3;
+    const y = dy / 3;
+    magnetEl.style.transform = `translate3d(${x}px,${y}px,0)`;
+    magnetEl.style.transition = 'transform 0.3s ease-out';
+  } else {
+    magnetEl.style.transform = 'translate3d(0,0,0)';
+    magnetEl.style.transition = 'transform 0.6s ease-in-out';
+  }
+});
+
+/* ══════════════════════════════════
+   SCROLL REVEAL (fade-in)
+══════════════════════════════════ */
+function initFadeIns() {
+  document.querySelectorAll('.fade-in').forEach(el => {
+    const dir = el.dataset.dir;
+    if (dir === 'x-left') el.classList.add('fade-in-x-left');
+    else if (dir === 'x-right') el.classList.add('fade-in-x-right');
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = parseInt(e.target.dataset.delay || 0);
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '50px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+}
+initFadeIns();
+
+/* ══════════════════════════════════
+   ANIMATED TEXT (char by char, scroll-driven)
+══════════════════════════════════ */
+function initAnimatedText() {
+  const container = document.getElementById('about-text');
+  if (!container) return;
+  const text = container.textContent;
+  container.textContent = '';
+
+  text.split('').forEach(char => {
+    const span = document.createElement('span');
+    span.className = 'anim-char';
+    const placeholder = document.createElement('span');
+    placeholder.className = 'placeholder';
+    placeholder.textContent = char === ' ' ? '\u00A0' : char;
+    const live = document.createElement('span');
+    live.className = 'live';
+    live.textContent = char === ' ' ? '\u00A0' : char;
+    span.appendChild(placeholder);
+    span.appendChild(live);
+    container.appendChild(span);
+  });
+
+  const chars = container.querySelectorAll('.live');
+  const total = chars.length;
+
+  function updateChars() {
+    const rect = container.getBoundingClientRect();
+    const winH = window.innerHeight;
+    // progress: 0 when element top hits 80% down, 1 when bottom hits 20% down
+    const start = winH * 0.8;
+    const end = winH * 0.2;
+    const elementProgress = (start - rect.top) / (start - end + rect.height);
+    const progress = Math.max(0, Math.min(1, elementProgress));
+
+    chars.forEach((char, i) => {
+      const charProgress = i / total;
+      const opacity = Math.max(0.15, Math.min(1, (progress - charProgress * 0.8) * 5));
+      char.style.opacity = opacity;
+    });
+  }
+
+  window.addEventListener('scroll', updateChars, { passive: true });
+  updateChars();
+}
+initAnimatedText();
+
+/* ══════════════════════════════════
+   STICKY CARD SCALE on scroll
+══════════════════════════════════ */
+function initCardScale() {
+  const cards = PROJECTS.map((_, i) => document.getElementById(`pcard-${i}`));
+  const total = cards.length;
+
+  function updateCards() {
+    cards.forEach((card, i) => {
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const cardTop = parseInt(card.style.top);
+      // how far past this card's sticky point have we scrolled
+      const scrollPastSticky = cardTop - rect.top;
+      // normalize: 0 = just stuck, 1 = fully scrolled past
+      const progress = Math.max(0, Math.min(1, scrollPastSticky / (window.innerHeight * 0.6)));
+      // target scale when fully scrolled
+      const targetScale = 1 - (total - 1 - i) * 0.03;
+      const scale = 1 - (1 - targetScale) * progress;
+      card.style.transform = `scale(${scale})`;
+    });
+  }
+
+  window.addEventListener('scroll', updateCards, { passive: true });
+  updateCards();
+}
+initCardScale();
+</script>
 </body>
 </html>
