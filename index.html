@@ -821,9 +821,153 @@ html,body{background:#060A12;font-family:'Kanit',sans-serif;overflow-x:hidden;sc
       </div>
     </div>
   </div>
+
+  <!-- CX2RECON -->
+  <div class="product-card recon fi" data-d="200">
+    <div class="product-inner">
+      <div class="product-info">
+        <div class="product-badge badge-recon">
+          <span class="badge-dot" style="background:#00FF88;animation:none"></span>
+          Built & Deployed
+        </div>
+        <div class="product-logo-mark">
+          <svg class="recon-logo-svg" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="52" height="52" rx="14" fill="url(#recon-bg)"/>
+            <defs>
+              <linearGradient id="recon-bg" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#001A0A"/>
+                <stop offset="100%" stop-color="#002812"/>
+              </linearGradient>
+              <linearGradient id="recon-green" x1="0" y1="52" x2="52" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00CC66"/>
+                <stop offset="100%" stop-color="#00FF88"/>
+              </linearGradient>
+            </defs>
+            <!-- radar sweep circle -->
+            <circle cx="26" cy="26" r="14" stroke="url(#recon-green)" stroke-width="1.5" fill="none" opacity=".5"/>
+            <circle cx="26" cy="26" r="8" stroke="url(#recon-green)" stroke-width="1.5" fill="none" opacity=".7"/>
+            <!-- crosshair lines -->
+            <line x1="26" y1="12" x2="26" y2="40" stroke="url(#recon-green)" stroke-width="1" opacity=".4"/>
+            <line x1="12" y1="26" x2="40" y2="26" stroke="url(#recon-green)" stroke-width="1" opacity=".4"/>
+            <!-- target dot -->
+            <circle cx="26" cy="26" r="2.5" fill="#00FF88"/>
+            <!-- blip -->
+            <circle cx="34" cy="20" r="2" fill="#00FF88" opacity=".8"/>
+          </svg>
+          <div class="product-name" style="background:linear-gradient(135deg,#00CC66,#00FF88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">CX2Recon</div>
+        </div>
+        <p class="product-tagline" style="color:rgba(180,255,220,.5)">A mobile cyber command center built for real-world threat intelligence. Active and passive network scanning, Linux-native recon tools, live threat feeds — all unified in a field-ready mobile interface.</p>
+        <div class="product-features">
+          <div class="product-feature recon-feature"><span class="feature-tick recon-tick">✓</span>Active & passive network scanning</div>
+          <div class="product-feature recon-feature"><span class="feature-tick recon-tick">✓</span>Linux-native recon tool integration</div>
+          <div class="product-feature recon-feature"><span class="feature-tick recon-tick">✓</span>Live threat intelligence feeds</div>
+          <div class="product-feature recon-feature"><span class="feature-tick recon-tick">✓</span>Mobile-first command interface</div>
+          <div class="product-feature recon-feature"><span class="feature-tick recon-tick">✓</span>Dark/deep web monitoring</div>
+        </div>
+        <button class="product-btn btn-recon" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request a Demo</button>
+      </div>
+      <div class="product-visual recon-visual">
+        <div class="product-visual-glow" style="background:radial-gradient(circle,#00CC66,transparent 70%)"></div>
+        <!-- Terminal / command center mockup -->
+        <div class="recon-mockup">
+          <div class="recon-term-header">
+            <div style="display:flex;gap:6px">
+              <span class="term-dot" style="background:#FF5F57"></span>
+              <span class="term-dot" style="background:#FFBD2E"></span>
+              <span class="term-dot" style="background:#28CA41"></span>
+            </div>
+            <span class="term-title">CX2Recon · Mobile Command</span>
+            <span class="term-live">● LIVE</span>
+          </div>
+          <div class="recon-term-body">
+            <div class="term-line"><span class="term-prompt">root@cx2recon:~#</span> <span class="term-cmd">nmap -sV --open 192.168.1.0/24</span></div>
+            <div class="term-line term-out">Starting Nmap 7.94 — scanning 254 hosts...</div>
+            <div class="term-line term-hit">● HOST UP — 192.168.1.42 · ports 22,80,443</div>
+            <div class="term-line term-hit">● HOST UP — 192.168.1.87 · ports 21,8080</div>
+            <div class="term-line"><span class="term-prompt">root@cx2recon:~#</span> <span class="term-cmd">whois 45.33.32.156</span></div>
+            <div class="term-line term-out">OrgName: Linode LLC · CIDR: 45.33.0.0/17</div>
+            <div class="term-line term-warn">⚠ Threat Intel Match — known C2 range</div>
+            <div class="term-line"><span class="term-prompt">root@cx2recon:~#</span><span class="term-cursor">█</span></div>
+          </div>
+          <div class="recon-stats-row">
+            <div class="recon-stat"><div class="recon-stat-val">14</div><div class="recon-stat-label">Hosts Found</div></div>
+            <div class="recon-stat"><div class="recon-stat-val" style="color:#FFBD2E">3</div><div class="recon-stat-label">Flagged</div></div>
+            <div class="recon-stat"><div class="recon-stat-val" style="color:#FF5F57">1</div><div class="recon-stat-label">Critical</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ════════ SERVICES ════════ -->
+<style>
+.product-card.recon{
+  background:linear-gradient(135deg,#000D04 0%,#001A0A 60%,#002010 100%);
+  border-color:rgba(0,204,102,.2);
+}
+.product-card.recon::before{
+  background:linear-gradient(90deg,transparent,rgba(0,255,136,.5),transparent);
+}
+.recon-visual{border-left:1px solid rgba(0,204,102,.12)}
+.badge-recon{background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.25);color:#00FF88}
+.recon-logo-svg{width:52px;height:52px;flex-shrink:0}
+.recon-feature{color:rgba(180,255,220,.55)}
+.recon-tick{background:rgba(0,204,102,.15)!important;color:#00CC66!important}
+.btn-recon{
+  background:linear-gradient(135deg,#007A3D,#00CC66,#00FF88,#00CC66);
+  color:#000D04;box-shadow:0 4px 20px rgba(0,204,102,.25);
+}
+.btn-recon:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,204,102,.45)}
+
+/* Terminal mockup */
+.recon-mockup{
+  width:clamp(240px,36vw,400px);
+  border-radius:16px;overflow:hidden;
+  background:#0A0F0A;border:1px solid rgba(0,204,102,.25);
+  box-shadow:0 24px 64px rgba(0,0,0,.7),0 0 40px rgba(0,204,102,.08);
+  animation:float 6s ease-in-out infinite;
+  font-family:'Space Grotesk',monospace;
+}
+.recon-term-header{
+  background:#111811;border-bottom:1px solid rgba(0,204,102,.15);
+  padding:10px 14px;display:flex;align-items:center;gap:10px;
+}
+.term-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.term-title{
+  flex:1;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(0,204,102,.5);text-align:center;
+}
+.term-live{font-size:.6rem;letter-spacing:.15em;color:#00FF88;animation:pulse 1.4s infinite}
+.recon-term-body{padding:14px;display:flex;flex-direction:column;gap:5px}
+.term-line{font-size:clamp(.6rem,.85vw,.72rem);line-height:1.5}
+.term-prompt{color:#00CC66;font-weight:600}
+.term-cmd{color:#C4D4E0}
+.term-out{color:rgba(196,212,224,.35);padding-left:4px}
+.term-hit{color:#00FF88;padding-left:4px}
+.term-warn{color:#FFBD2E;padding-left:4px}
+.term-cursor{color:#00FF88;animation:blink .8s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.recon-stats-row{
+  display:flex;border-top:1px solid rgba(0,204,102,.1);
+}
+.recon-stat{
+  flex:1;padding:12px 8px;text-align:center;
+  border-right:1px solid rgba(0,204,102,.08);
+}
+.recon-stat:last-child{border-right:none}
+.recon-stat-val{
+  font-family:'Kanit',sans-serif;font-weight:900;font-size:1.4rem;color:#00FF88;
+}
+.recon-stat-label{
+  font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(0,204,102,.4);margin-top:2px;
+}
+@media(max-width:640px){
+  .recon-visual{border-left:none;border-top:1px solid rgba(0,204,102,.12)}
+}
+</style>
 <section id="services">
   <h2 class="services-h2 fi" data-d="0">How We<br/>Work.</h2>
   <div class="services-grid">
